@@ -19,7 +19,11 @@
             </div>
         </div>
 
-        <div id="beta-wrap">
+        
+        <div class="content">
+        @if(!loggedIn){
+            
+            <div id="beta-wrap">
                 <div class="container" id="beta">
                     <div class="row detailed-points">
                         <div class="col-md-12">
@@ -28,9 +32,7 @@
                     </div>
                 </div>
             </div>
-        
-        <div class="content">
-        @if(!loggedIn){
+            
             <div id="signup-wrap">
                 <div class="text-center">
                     <form id="signup-form" class="form-inline" action="@controllers.routes.Registration.handleStartSignUp().absoluteURL(UsernamePasswordProvider.sslEnabled)" autocomplete="off" method="post">
