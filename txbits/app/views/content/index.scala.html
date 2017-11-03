@@ -29,7 +29,7 @@
                     <div class="row detailed-points">
                         <h2>Welcome to dabs.exchange!</h2>
                         <div class="col-md-12">
-                            If you are new to dabs.exchange, signup with us below and start trading. 
+                            Login and start trading with us right away! 
                         </div>
                     </div>
                 </div>
@@ -62,29 +62,31 @@
             </div>
             
             
-            <div id="signup-wrap">
+            <div id="login-wrap">
                 <div class="text-center">
-                    <form id="signup-form" class="form-inline" action="@controllers.routes.Registration.handleStartSignUp().absoluteURL(UsernamePasswordProvider.sslEnabled)" autocomplete="off" method="post">
-                        @CSRF.formField
-                        <div class="form-group sign-up-text">Sign up:</div>
-                        <div class="form-group" id="email_field">
-                            <label class="sr-only" for="email">@Messages("auth.signup.email1")</label>
-                            <div class="controls">
-                                <input id="email" name="email" value="" class="form-control" type="text" placeholder="@Messages("auth.signup.email1")">
+                    <div class="form-inline">
+                        <form action = "@routes.ProviderController.loginPost().url" autocomplete="off" method="POST">
+                            @views.html.helper.CSRF.formField
+                            <div class="form-group sign-up-text">Login:</div>
+                            <div class="form-group" id="username_field">
+                                <div class="controls">
+                                    <input type="text" id="username" name="username" value="" placeholder="@Messages("auth.signup.email1")" class="form-control" autocomplete="off"/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group" id="email2_field">
-                            <label class="sr-only" for="email2">@Messages("auth.signup.email2")</label>
-                            <div class="controls">
-                                <input id="email2" name="email2" value="" class="form-control" type="text" placeholder="@Messages("auth.signup.email2")">
+                            <div class="form-group" id="password_field">
+                                <div class="controls">
+                                    <input type="password" id="password" name="password" placeholder="@Messages("terminology.password")" class="form-control" autocomplete="off"/>
+                                </div>
                             </div>
-                        </div>
-                        <button type="submit" class="btn btn-default" title="@Messages("auth.signup.createAccount")"><i class="glyphicon glyphicon-chevron-right"></i></button>
-                    </form>
+
+                            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>
         }
 
+           
             <div id="ticker-wrap">
                 <div class="container">
                     <div class="row">
@@ -109,30 +111,70 @@
                     }
                 </div>
             </div>
-
-        @if(!loggedIn){
-            <div id="login-wrap">
-                <div class="text-center">
-                    <div class="form-inline">
-                        <form action = "@routes.ProviderController.loginPost().url" autocomplete="off" method="POST">
-                            @views.html.helper.CSRF.formField
-                            <div class="form-group sign-up-text">Login:</div>
-                            <div class="form-group" id="username_field">
-                                <div class="controls">
-                                    <input type="text" id="username" name="username" value="" placeholder="@Messages("auth.signup.email1")" class="form-control" autocomplete="off"/>
-                                </div>
-                            </div>
-                            <div class="form-group" id="password_field">
-                                <div class="controls">
-                                    <input type="password" id="password" name="password" placeholder="@Messages("terminology.password")" class="form-control" autocomplete="off"/>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-chevron-right"></i></button>
-                        </form>
+            
+            
+            <div id="beta-wrap">
+              <div class="text-center">
+                <div class="container" id="beta">
+                    <div class="row detailed-points">
+                        <h2>New to dabs.exchange?</h2>
+                        <div class="col-md-12">
+                            Signup for a dabs.exchange account below. You'll be trading in no time. 
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            
+            
+            <div id="ticker-wrap">
+                <div class="container">
+                    <div class="row">
+                        <div id="big-tickers">
+                        </div>
                     </div>
                 </div>
             </div>
+            
+             <div class="container">
+                <div class="row">
+                    @request.flash.get("success").map { msg =>
+                        <div class="alert alert-info">
+                            @msg
+                        </div>
+                    }
+                    @request.flash.get("error").map { msg =>
+                        <div class="alert alert-danger">
+                            @Messages(msg)
+                        </div>
+                    }
+                </div>
+            </div>
+            
+
+        @if(!loggedIn){
+            <div id="signup-wrap">
+                <div class="text-center">
+                    <form id="signup-form" class="form-inline" action="@controllers.routes.Registration.handleStartSignUp().absoluteURL(UsernamePasswordProvider.sslEnabled)" autocomplete="off" method="post">
+                        @CSRF.formField
+                        <div class="form-group sign-up-text">Sign up:</div>
+                        <div class="form-group" id="email_field">
+                            <label class="sr-only" for="email">@Messages("auth.signup.email1")</label>
+                            <div class="controls">
+                                <input id="email" name="email" value="" class="form-control" type="text" placeholder="@Messages("auth.signup.email1")">
+                            </div>
+                        </div>
+                        <div class="form-group" id="email2_field">
+                            <label class="sr-only" for="email2">@Messages("auth.signup.email2")</label>
+                            <div class="controls">
+                                <input id="email2" name="email2" value="" class="form-control" type="text" placeholder="@Messages("auth.signup.email2")">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-default" title="@Messages("auth.signup.createAccount")"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                    </form>
+                </div>
+            </div>
+         
         }
 
             <div id="beta-wrap">
