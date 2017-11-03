@@ -27,7 +27,7 @@
               <div class="text-center">
                 <div class="container" id="beta">
                     <div class="row detailed-points">
-                        <h3>Welcome to dabs.exchange!</h3>
+                        <h2>Welcome to dabs.exchange!</h2>
                         <div class="col-md-12">
                             If you are new to dabs.exchange, signup with us below and start trading. 
                         </div>
@@ -35,6 +35,23 @@
                 </div>
               </div>
             </div>
+            
+            
+             <div class="container">
+                <div class="row">
+                    @request.flash.get("success").map { msg =>
+                        <div class="alert alert-info">
+                            @msg
+                        </div>
+                    }
+                    @request.flash.get("error").map { msg =>
+                        <div class="alert alert-danger">
+                            @Messages(msg)
+                        </div>
+                    }
+                </div>
+            </div>
+            
             
             <div id="signup-wrap">
                 <div class="text-center">
